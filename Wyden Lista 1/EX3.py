@@ -6,6 +6,10 @@ class Vehicle:
         self.nonRefrigeratedSpace = nonRefrigeratedSpace
         self.fuelConsumption = fuelConsumption
 
+def PrintResultNotFoundMessage(status):
+    print("Optimal Result not found")
+    print("Status: %s\n\n" % (pulp.LpSolution[status]))
+
 if __name__ == "__main__":
     VehicleA = Vehicle(36, 12, 1200)
     VehicleB = Vehicle(12, 24, 480)
@@ -40,5 +44,4 @@ if __name__ == "__main__":
         print("Fuel Used: %d liters\n\n" % fuelUsed)
 
     else:
-        print("Optimal Result not found")
-        print("Status: %d\n\n" % status)
+        PrintResultNotFoundMessage(status)

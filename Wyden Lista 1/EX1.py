@@ -6,6 +6,10 @@ class Product:
         self.fabTime = fabTime
         self.unitLimit = unitLimit
 
+def PrintResultNotFoundMessage(status):
+    print("Optimal Result not found")
+    print("Status: %s\n\n" % (pulp.LpSolution[status]))
+
 if __name__ == "__main__":
     ProductA = Product(100, 2, 40)
     ProductB = Product(150, 3, 30)
@@ -38,5 +42,4 @@ if __name__ == "__main__":
         print("Profit: R$%.2f\n\n" % profit)
     
     else:
-        print("Optimal Result not found")
-        print("Status: %d\n\n" % status)
+        PrintResultNotFoundMessage(status)

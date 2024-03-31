@@ -7,6 +7,10 @@ class Product:
         self.resourceUsage = resourceUsage
         self.profitPerUnit = profitPerUnit
 
+def PrintResultNotFoundMessage(status):
+    print("Optimal Result not found")
+    print("Status: %s\n\n" % (pulp.LpSolution[status]))
+
 if __name__ == "__main__":
     Chairs = Product("Chair", 10, 5, 180)
     Tables = Product("Table", 15, 20, 320)
@@ -43,5 +47,4 @@ if __name__ == "__main__":
         print("Profit: R$%.2f\n\n" % profit)
     
     else:
-        print("Optimal Result not found")
-        print("Status: %d\n\n" % status)
+        PrintResultNotFoundMessage(status)
