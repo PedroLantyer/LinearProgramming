@@ -1,13 +1,49 @@
 import pulp
+import tkinter as tk
 
-def PrintResultNotFoundMessage(status):
-    print("Optimal Result not found")
-    print("Status: %s\n\n" % (pulp.LpSolution[status]))
+class TkGUI:
+    def __init__(self, master, dimensions, title) -> None:
+        self.dimensions = dimensions
+        self.title = title
+        self.master = master
+        self.master.title(self.title)
+        self.master.geometry(self.dimensions)
+        self.master.config(bg="#252526")
+
+    def createWidgets(self):
         
+        self.radioOption = tk.StringVar(master=self.master, value= "A") 
+        self.answerText = tk.StringVar(value = " ")   
+
+        radioText = ["Problem A", "Problem B", "Problem C", "Problem D"]
+        radioValues = ["A", "B", "C", "D"]
+        for i in range(4):
+            radioButton = tk.Radiobutton(self.master, text=radioText[i], font=("Courier New",14), selectcolor="light grey", highlightbackground= "#252526", highlightcolor= "#007ACC", bg= "#252526", activebackground="#252526", fg="#007ACC", activeforeground="#007ACC", variable=self.radioOption, value = radioValues[i]).pack()
+
+        answerBox = tk.Label(master = self.master, font=("Consolas", 14), text= self.answerText.get(), activebackground="#252526" ,background="#252526", fg="#007ACC", activeforeground="#007ACC", border = 2, borderwidth=4, width= 50, height= 8)
+        
+        def setAnswerText():
+            optionChosen = self.radioOption.get()
+            match optionChosen:
+                case "A":
+                    self.answerText = SolveProblemA()
+                case "B":
+                    self.answerText = SolveProblemB()
+                case "C":
+                    self.answerText = SolveProblemC()
+                case "D":
+                    self.answerText = SolveProblemD()
+                case _:
+                    pass
+            answerBox.config(text= self.answerText)
+            
+        getResButton = tk.Button(self.master, text="Get Results", font=("Courier New",14), background= "#4c4c4f", activebackground="#4c4c4f", foreground="#007ACC", activeforeground="#007ACC", command=setAnswerText).pack()
+        answerBox.pack(padx=2, pady=10)     
+
 def SolveProblemA():
     #DEFINE PROBLEM
     ProblemA = pulp.LpProblem("Problem A", pulp.const.LpMaximize)
-    
+
     #DEFINE VARIABLES
     A = pulp.LpVariable("A", lowBound = 0, cat = "Integer")
     B = pulp.LpVariable("B", lowBound = 0, cat = "Integer")
@@ -25,18 +61,24 @@ def SolveProblemA():
     #SOLVE PROBLEM
     status = ProblemA.solve()
 
-
     if(status == 1):
-        maxValue = (2 * A.varValue) + (B.varValue) - (3 * C.varValue) + (5 * D.varValue)
+        varA, varB, varC, varD = A.varValue, B.varValue, C.varValue, D.varValue
+        maxValue = (2 * varA) + varB - (3 * varC) + (5 * varD)
         
-        print("Results for problem #1:")
-        print("A: %d\nB: %d\nC: %d\n D: %d" % (A.varValue, B.varValue, C.varValue, D.varValue))
-        print("Max value: %d\n\n" % maxValue)
+        stringPartOne = "Results for problem #1:\n"
+        stringPartTwo = f"A: {varA}\nB: {varB}\nC: {varC}\nD: {varD}\n"
+        stringPartThree = f"Max value : {maxValue}\n\n"
+        result = f"{stringPartOne}{stringPartTwo}{stringPartThree}"
 
+        return result
     else:
-        PrintResultNotFoundMessage(status)
+        stringPartOne = "Couldn't find optimal result for problem #1\n"
+        stringPartTwo = f"Status: {pulp.LpSolution[status]}"
+        result = f"{stringPartOne}{stringPartTwo}"
 
-def SolveProblemB(): 
+        return result
+
+def SolveProblemB():
     #DEFINE PROBLEM
     ProblemB = pulp.LpProblem("Problem 2") #LpMinimize is set by default
 
@@ -55,17 +97,24 @@ def SolveProblemB():
     status = ProblemB.solve()
 
     if(status == 1):
-        minValue = (-2 * (A.varValue)) - (B.varValue)
+        varA, varB = A.varValue, B.varValue
+        minValue = (-2 * varA) - (varB)
 
-        print("Results for problem #2:")
-        print("A: %d\nB: %d" % (A.varValue, B.varValue))
-        print("MinValue: %d\n\n" % minValue)
+        stringPartOne = "Results for problem #2:\n"
+        stringPartTwo = f"A: {varA}\nB: {varB}\n"
+        stringPartThree = f"Min value : {minValue}\n\n"
+        result = f"{stringPartOne}{stringPartTwo}{stringPartThree}"
+        
+        return result
     
     else:
-        PrintResultNotFoundMessage(status)
+        stringPartOne = "Couldn't find optimal result for problem #2\n"
+        stringPartTwo = f"Status: {pulp.LpSolution[status]}"
+        result = f"{stringPartOne}{stringPartTwo}"
+
+        return result
 
 def SolveProblemC():
-    #PROBLEM 3: -A + (3*B)
 
     #DEFINE PROBLEM
     ProblemC = pulp.LpProblem("Problem C") #LpMinimize is set by default
@@ -85,14 +134,22 @@ def SolveProblemC():
     status = ProblemC.solve()
 
     if(status == 1):
-        minValue = (-A.varValue) + (3 * (B.varValue))
+        varA, varB = A.varValue, B.varValue
+        minValue = (-varA) + (3 * varB)
 
-        print("Results for problem #3:")
-        print("A: %d\nB: %d" % (A.varValue, B.varValue))
-        print("Min Value: %d\n\n" % minValue)
+        stringPartOne = "Results for problem #3:\n"
+        stringPartTwo = f"A: {varA}\nB: {varB}\n"
+        stringPartThree = f"Min value : {minValue}\n\n"
+        result = f"{stringPartOne}{stringPartTwo}{stringPartThree}"
+
+        return result
 
     else:
-        PrintResultNotFoundMessage(status)
+        stringPartOne = "Couldn't find optimal result for problem #3\n"
+        stringPartTwo = f"Status: {pulp.LpSolution[status]}"
+        result = f"{stringPartOne}{stringPartTwo}"
+
+        return result
 
 def SolveProblemD():
     #DEFINE PROBLEM
@@ -113,19 +170,26 @@ def SolveProblemD():
     status = ProblemD.solve()
 
     if(status == 1):
+        varA, varB = A.varValue, B.varValue
         maxValue = (A.varValue) + (3 * (B.varValue))
 
-        print("Results for problem #3:")
-        print("A: %d\nB: %d" % (A.varValue, B.varValue))
-        print("Max Value: %d\n\n" % maxValue)
+        stringPartOne = "Results for problem #4:\n"
+        stringPartTwo = f"A: {varA}\nB: {varB}\n"
+        stringPartThree = f"Min value : {maxValue}\n\n"
+        result = f"{stringPartOne}{stringPartTwo}{stringPartThree}"
         pass
 
     else:
-        PrintResultNotFoundMessage(status)
+        stringPartOne = "Couldn't find optimal result for problem #4\n"
+        stringPartTwo = f"Status: {pulp.LpSolution[status]}"
+        result = f"{stringPartOne}{stringPartTwo}"
+
+        return result
     
 
 if __name__ == "__main__":
-    SolveProblemA()
-    SolveProblemB()
-    SolveProblemC()
-    SolveProblemD()
+    #GUI
+    master = tk.Tk()
+    app = TkGUI(master = master, dimensions="480x360", title="Exercise 5") 
+    app.createWidgets()
+    master.mainloop()
