@@ -27,7 +27,7 @@ class CheckBox:
         pass
 
 class Entry:
-    disabledBgColor = "White Smoke"
+    disabledBgColor = bgColor = "#f0f0f0"
     disabledFgColor = "Black"
     bgColor = "White"
     fgColor="Black"
@@ -74,12 +74,12 @@ class GetVarDialog:
         pass
 
 class AppFrame:
-    bgColor = "White Smoke"
+    bgColor = "#f0f0f0"
 
 class MainGUI:
-    bgColor = "White Smoke"
+    bgColor = "#f0f0f0" #Windows Control Color Code
     title = "LineSolver"
-    dimension = "774x460"
+    dimension = "774x430"
 
     def __init__(self) -> None:
         pass

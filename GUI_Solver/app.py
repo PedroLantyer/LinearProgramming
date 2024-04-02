@@ -39,7 +39,7 @@ class TkGUI:
 
 
         #CREATE LABELS
-        toLabel = tk.Label(master=self.frame,text = "To:", bg=labelStyles.bgColor, fg=labelStyles.fgColor, font=[labelStyles.font, labelStyles.fontSize]).place(x=12, y=98)
+        toLabel = tk.Label(master=self.frame,text = "To:", bg=labelStyles.bgColor, fg=labelStyles.fgColor, font=[labelStyles.font, labelStyles.fontSize]).place(x=12, y=110)
         objectiveLabel = tk.Label(master=self.frame, text= "Objective:", bg=labelStyles.bgColor, fg=labelStyles.fgColor, font=[labelStyles.font,labelStyles.fontSize]).place(x=5, y=15)
         
         #CREATE LIST BOXES
@@ -77,8 +77,6 @@ class TkGUI:
         radioMax = tk.Radiobutton(master=self.frame, text="Max",bg = radioStyles.bgColor, fg=radioStyles.fgColor, font=[radioStyles.font, radioStyles.fontSize], variable=self.radioOption, value="Max", command=SetRadioOption)
         radioValueOf = tk.Radiobutton(master=self.frame, text="Value Of:",bg = radioStyles.bgColor, fg=radioStyles.fgColor, font=[radioStyles.font, radioStyles.fontSize], variable=self.radioOption, value="ValueOf", command=SetRadioOption)
 
-        #CREATE CHECK BOXES
-        checkBoxNonNegativeConstraint = tk.Checkbutton(master=self.frame, text="Make Unconstrained Variables Non-Negative", bg=checkBoxStyles.bgColor, fg=checkBoxStyles.fgColor, font=[checkBoxStyles.font, checkBoxStyles.fontSize])
 
         #CREATE ENTRIES
         entryValueOf = tk.Entry(master=self.frame, bg=entryStyles.bgColor, fg=entryStyles.fgColor, font=[entryStyles.font, entryStyles.fontSize], state="disabled", disabledbackground=entryStyles.disabledBgColor, disabledforeground=entryStyles.disabledFgColor, relief=entryStyles.relief)
@@ -89,23 +87,22 @@ class TkGUI:
         buttonAddConstants.place(x=585, y=223, width=156, height=56)
         buttonDelVariables.place(x=585, y=290, width=156, height=32)
         buttonDelConstants.place(x=585, y=328, width=156, height=32)
-        buttonSolve.place(x=585, y=415, width=156, height=32)
+        buttonSolve.place(x=585, y=383, width=156, height=32)
 
         #PLACE RADIO BUTTONS
-        radioMin.place(x=61, y=98, width=64, height=25)
-        radioMax.place(x=131, y=98, width=64, height=25)
-        radioValueOf.place(x=201, y=98, width=130, height=25)
+        radioMin.place(x=61, y=110, width=64, height=25)
+        radioMax.place(x=131, y=110, width=64, height=25)
+        radioValueOf.place(x=201, y=110, width=130, height=25)
 
-        #PLACE CHECK BOXES
-        checkBoxNonNegativeConstraint.place(x=12, y=419, width=441, height=24)
+        #PLACE ENTRIES
+        entryValueOf.place(x=329, y=110, width=250, height=27)
+        entryObjective.place(x=118, y= 12, width=623, height=27)
 
         #PLACE LIST BOXES
         listBoxVariables.place(x=12, y=159, width=567, height=124)
         listBoxConstraints.place(x=12, y=289, width=567, height=124)
 
-        #PLACE ENTRIES
-        entryValueOf.place(x=329, y=98, width=250, height=27)
-        entryObjective.place(x=118, y= 12, width=623, height=27)
+        
 
 
     
