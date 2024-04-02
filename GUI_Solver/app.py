@@ -22,7 +22,7 @@ class TkGUI:
         #INITIALIZE THE FRAME
         self.frame = tk.Frame(master=master, bg=frameSyles.bgColor)
         self.frame.pack(fill='both', expand=True)
-    
+
     def CreateWidgets(self):
         #GET DESIGNER CLASSES
         
@@ -41,17 +41,24 @@ class TkGUI:
         toLabel = tk.Label(master=self.frame,text = "To:", bg="White Smoke", foreground="Black", font=["Courier New", 11]).place(x = 12, y = 77, width=43, height=21)
         
 
-        #CREATE AddVarWindow FUNCTION
-        
+
+        #CREATE SOLVE BUTTON:
+        buttonSolve = tk.Button(master=self.frame, text="Solve", bg=buttonStyles.bgColor, fg= buttonStyles.fgColor, font=[buttonStyles.font, buttonStyles.fontSize], relief=buttonStyles.relief, state="disabled")
+
+        #OPEN AddVarWindow
         def OpenAddVarWindow():
             getVarWindow = dialogBoxGetVar.getVariableWindow(text="Insert Variable")
+            getVarWindow.top.wait_window() #WAIT FOR WINDOW TO CLOSE
+            print("Window Closed, continuing...")
+            if(len(DataBridge.variableArr) >= 2):
+                buttonSolve.config(state="normal")
+
 
         #CREATE BUTTONS
         buttonAddVariables = tk.Button(master=self.frame, text="Add Variables", bg=buttonStyles.bgColor, fg= buttonStyles.fgColor, font=[buttonStyles.font, buttonStyles.fontSize], relief=buttonStyles.relief, command=OpenAddVarWindow)
         buttonAddConstants = tk.Button(master=self.frame, text="Add Constants", bg=buttonStyles.bgColor, fg= buttonStyles.fgColor, font=[buttonStyles.font, buttonStyles.fontSize], relief=buttonStyles.relief)
         buttonDelVariables = tk.Button(master=self.frame, text="Delete Variable", bg=buttonStyles.bgColor, fg= buttonStyles.fgColor, font=[buttonStyles.font, buttonStyles.fontSize], relief=buttonStyles.relief)
         buttonDelConstants = tk.Button(master=self.frame, text="Delete Constant", bg=buttonStyles.bgColor, fg= buttonStyles.fgColor, font=[buttonStyles.font, buttonStyles.fontSize], relief=buttonStyles.relief)
-        buttonSolve = tk.Button(master=self.frame, text="Solve", bg=buttonStyles.bgColor, fg= buttonStyles.fgColor, font=[buttonStyles.font, buttonStyles.fontSize], relief=buttonStyles.relief)
 
         #DEF RADIO OPTION RELATED FUNCTION
         def SetRadioOption():

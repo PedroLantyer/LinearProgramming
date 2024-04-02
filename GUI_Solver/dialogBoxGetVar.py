@@ -47,6 +47,7 @@ class getVariableWindow:
                 print("User attempted to add variable that already exists")
             else:
                 bridge.setVariable(currentValue.get())
+                self.top.destroy()
 
         #CREATE BUTTON
         buttonSubmit = self.dialog.Button(frame, text='Add', command=passVariable)

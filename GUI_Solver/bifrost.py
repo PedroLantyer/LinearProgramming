@@ -14,3 +14,7 @@ class DataBridge:
         for item in self.variableArr:
             if(variable == item): return True
         return False
+    
+    def clearVarArray(self):
+        self.variableArr.clear()
+        print("Cleared variable array")
