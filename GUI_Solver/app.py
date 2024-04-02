@@ -26,6 +26,7 @@ class TkGUI:
     def CreateWidgets(self):
         #GET DESIGNER CLASSES
         
+        labelStyles = styles.Label()
         buttonStyles = styles.Button()
         radioStyles = styles.RadioButton()
         checkBoxStyles = styles.CheckBox()
@@ -38,7 +39,7 @@ class TkGUI:
 
 
         #CREATE "TO:" LABEL
-        toLabel = tk.Label(master=self.frame,text = "To:", bg="White Smoke", foreground="Black", font=["Courier New", 11]).place(x = 12, y = 77, width=43, height=21)
+        toLabel = tk.Label(master=self.frame,text = "To:", bg=labelStyles.bgColor, fg=labelStyles.fgColor, font=[labelStyles.font, labelStyles.fontSize]).place(x = 12, y = 77, width=43, height=21)
         
 
 
