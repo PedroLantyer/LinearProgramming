@@ -159,23 +159,4 @@ def SolveProblemA():
 
         return result
 """
-
-"""def createWidgets(self):
-        
-        self.radioOption = tk.StringVar(master=self.master, value= "A") 
-        self.answerText = tk.StringVar(value = " ")   
-
-        radioText = ["Problem A", "Problem B", "Problem C", "Problem D"]
-        radioValues = ["A", "B", "C", "D"]
-        for i in range(4):
-            radioButton = tk.Radiobutton(self.master, text=radioText[i], font=("Courier New",14), selectcolor="light grey", highlightbackground= "#252526", highlightcolor= "#007ACC", bg= "#252526", activebackground="#252526", fg="#007ACC", activeforeground="#007ACC", variable=self.radioOption, value = radioValues[i]).pack()
-
-        answerBox = tk.Label(master = self.master, font=("Consolas", 14), text= self.answerText.get(), activebackground="#252526" ,background="#252526", fg="#007ACC", activeforeground="#007ACC", border = 2, borderwidth=4, width= 50, height= 8)
-        
-        def setAnswerText():
-            optionChosen = self.radioOption.get()
-            answerBox.config(text= self.answerText)
-            
-        getResButton = tk.Button(self.master, text="Get Results", font=("Courier New",14), background= "#4c4c4f", activebackground="#4c4c4f", foreground="#007ACC", activeforeground="#007ACC", command=setAnswerText).pack()
-        answerBox.pack(padx=2, pady=10)     """
 #SAMPLES
