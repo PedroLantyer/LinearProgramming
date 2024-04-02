@@ -79,9 +79,7 @@ class AppFrame:
 class MainGUI:
     bgColor = "White Smoke"
     title = "LineSolver"
-    dimension = "774x497"
-    width = 774
-    height = 497
+    dimension = "774x460"
 
     def __init__(self) -> None:
         pass
