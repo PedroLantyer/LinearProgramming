@@ -35,12 +35,15 @@ class TkGUI:
 
         #CREATE TK VARIABLES
         self.radioOption = tk.StringVar(value="Max")
-        self.checkBoxNonNegativeOption = tk.IntVar(value=0)
+        self.infLowerBoundary = tk.IntVar(value=0)
+        self.infUpperBoundary = tk.IntVar(value=0)
 
 
         #CREATE LABELS
         toLabel = tk.Label(master=self.frame,text = "To:", bg=labelStyles.bgColor, fg=labelStyles.fgColor, font=[labelStyles.font, labelStyles.fontSize]).place(x=12, y=110)
         objectiveLabel = tk.Label(master=self.frame, text= "Objective:", bg=labelStyles.bgColor, fg=labelStyles.fgColor, font=[labelStyles.font,labelStyles.fontSize]).place(x=5, y=15)
+        lowerBoundLabel = tk.Label(master=self.frame, text="Lower Boundary:", bg=labelStyles.bgColor, fg=labelStyles.fgColor, font=[labelStyles.font, labelStyles.fontSize]).place(x=227,y=45)
+        upperBoundLabel = tk.Label(master=self.frame, text="Upper Boundary:", bg=labelStyles.bgColor, fg=labelStyles.fgColor, font=[labelStyles.font, labelStyles.fontSize]).place(x=227,y=77)
         
         #CREATE LIST BOXES
         listBoxVariables = tk.Listbox(master=self.frame, bg=listBoxStyles.bgColor, fg=listBoxStyles.fgColor, font=[listBoxStyles.font, listBoxStyles.fontSize], relief=listBoxStyles.relief)
@@ -81,6 +84,26 @@ class TkGUI:
         #CREATE ENTRIES
         entryValueOf = tk.Entry(master=self.frame, bg=entryStyles.bgColor, fg=entryStyles.fgColor, font=[entryStyles.font, entryStyles.fontSize], state="disabled", disabledbackground=entryStyles.disabledBgColor, disabledforeground=entryStyles.disabledFgColor, relief=entryStyles.relief)
         entryObjective = tk.Entry(master=self.frame, bg=entryStyles.bgColor, fg=entryStyles.fgColor, font=[entryStyles.font, entryStyles.fontSize], relief=entryStyles.relief)
+        entryLowerBoundary = tk.Entry(master=self.frame, disabledbackground=entryStyles.disabledBgColor, disabledforeground=entryStyles.disabledFgColor ,bg=entryStyles.bgColor, fg=entryStyles.fgColor, font=[entryStyles.font, entryStyles.fontSize], relief=entryStyles.relief)
+        entryUpperBoundary = tk.Entry(master=self.frame, disabledbackground=entryStyles.disabledBgColor, disabledforeground=entryStyles.disabledFgColor, bg=entryStyles.bgColor, fg=entryStyles.fgColor, font=[entryStyles.font, entryStyles.fontSize], relief=entryStyles.relief)
+
+        def SetInfLowerBoundary():
+            if(self.infLowerBoundary.get() == 1):
+                entryLowerBoundary.delete(0,tk.END)
+                entryLowerBoundary.config(state="disabled")
+            else:
+                entryLowerBoundary.config(state="normal")
+        
+        def SetInfUpperBoundary():
+            if(self.infUpperBoundary.get() == 1):
+                entryUpperBoundary.delete(0, tk.END)
+                entryUpperBoundary.config(state="disabled")
+            else:
+                entryUpperBoundary.config(state="normal")
+
+        #CREATE CHECKBOXES
+        checkBoxInfLowerBoundary = tk.Checkbutton(master=self.frame, text="Infinite Lower Boundary", bg=checkBoxStyles.bgColor, fg=checkBoxStyles.fgColor, font=[checkBoxStyles.font,checkBoxStyles.fontSize], variable=self.infLowerBoundary, onvalue=1, offvalue=0, command=SetInfLowerBoundary)
+        checkBoxInfUpperBoundary = tk.Checkbutton(master=self.frame, text="Infinite Upper Boundary", bg=checkBoxStyles.bgColor, fg=checkBoxStyles.fgColor, font=[checkBoxStyles.font,checkBoxStyles.fontSize], variable=self.infUpperBoundary, onvalue=1, offvalue=0, command=SetInfUpperBoundary)
 
         #PLACE BUTTONS
         buttonAddVariables.place(x=585, y=161, width=156, height=56)
@@ -97,6 +120,12 @@ class TkGUI:
         #PLACE ENTRIES
         entryValueOf.place(x=329, y=110, width=250, height=27)
         entryObjective.place(x=118, y= 12, width=623, height=27)
+        entryLowerBoundary.place(x=375, y=42, width=78, height=27)
+        entryUpperBoundary.place(x=375, y=75, width=78, height=27)
+
+        #PLACE CHECKBOXES
+        checkBoxInfLowerBoundary.place(x= 459, y=45, width=285, height=25)
+        checkBoxInfUpperBoundary.place(x= 459, y=77, width=285, height=25)
 
         #PLACE LIST BOXES
         listBoxVariables.place(x=12, y=159, width=567, height=124)
