@@ -11,11 +11,10 @@ class DataBridge:
         print(f"Variable set to: {variable}")
         print(f"Current Array Length: {len(self.variableArr)}")
 
-    def SetBoundariesForVariable(self, lowBound, upBound):
-        boundaries = [lowBound, upBound]
+    def SetBoundariesForVariable(self, boundaries):
         self.variableBoundaries.append(boundaries)
         print(f"Boundaries added at index: {len(self.variableArr)}")
-        print(f"Values:\nLower Boundary: {lowBound}\nUpper Boundary: {upBound}")
+        print(f"Values:\nLower Boundary: {boundaries[0]}\nUpper Boundary: {boundaries[1]}")
 
     
     def VarAlreadyExists(self, variable):

@@ -133,7 +133,7 @@ class getVariableWindow:
                 if(ValidVariableValue() and ValidLowerBoundary() and ValidUpperBoundary()):
                     bridge.SetVariable(currentVarValue.get())
                     boundaries = GetBoundaries()
-                    bridge.SetBoundariesForVariable(lowBound=boundaries[0],upBound=boundaries[1])
+                    bridge.SetBoundariesForVariable(boundaries=boundaries)
                     self.top.destroy()
                 
                 else:
