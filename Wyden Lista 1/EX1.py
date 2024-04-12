@@ -16,17 +16,26 @@ if __name__ == "__main__":
     timeLimit = 120
     
     #DEFINE PROBLEM
-    maxProfit = pulp.LpProblem("Exercise 1", pulp.const.LpMaximize)
+    maxProfit = pulp.LpProblem("Exercise 1", sense=-1)
     
     #BLOCK TO DEFINE VARIABLES
     unitCountA = pulp.LpVariable("Unit Count for Product A", lowBound = 0, upBound = ProductA.unitLimit, cat = "Integer")
     unitCountB = pulp.LpVariable("Unit Count for Product B", lowBound = 0, upBound = ProductB.unitLimit, cat = "Integer")
     
-    #DEFINE OBJECTIVE
-    maxProfit += (ProductA.profitPerUnit * unitCountA) + (ProductB.profitPerUnit * unitCountB)
+    x_1 = [unitCountA, unitCountB]
+    a_1 = [ProductA.profitPerUnit, ProductB.profitPerUnit]
+
+    #SET OBJECTIVE
+    e_1 = pulp.LpAffineExpression([(x_1[i],a_1[i]) for i in range(len(x_1))])
+    objective = pulp.LpConstraint(e = e_1, sense=-1, name="objective")
+    maxProfit.setObjective(objective)
 
     #DEFINE CONSTRAINTS
-    maxProfit += (ProductA.fabTime * unitCountA) + (ProductB.fabTime * unitCountB) <= timeLimit
+    x_2 = x_1
+    a_2 = [ProductA.fabTime, ProductB.fabTime]
+    e_2 = pulp.LpAffineExpression([(x_2[i],a_2[i]) for i in range(len(x_1))])
+    constraint_1 = pulp.LpConstraint(e=e_2, sense=-1, rhs=timeLimit)
+    maxProfit.addConstraint(constraint_1)
     
     #SOLVE PROBLEM
     status = maxProfit.solve()
